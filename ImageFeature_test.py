@@ -1,14 +1,16 @@
 caffe_root = '/home/ubuntu/caffe/'
 data_root = '/home/ubuntu/kaggle/raw/'
+h5_root = '/mnt/'
 
 import numpy as np
-"""
+
 import sys
 sys.path.insert(0, caffe_root + 'python')
-"""
+
 import caffe
-"""
+
 import os
+"""
 if not os.path.isfile(caffe_root + 'models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel'):
     print("Downloading pre-trained CaffeNet model...")
     !caffe_root/scripts/download_model_binary.py ../models/bvlc_reference_caffenet
@@ -39,7 +41,7 @@ import h5py
 import pandas as pd
 batch_size = 500
 
-f = h5py.File(data_root+'test_image_fc7features.h5','w')
+f = h5py.File(h5_root+'test_image_fc7features.h5','w')
 filenames = f.create_dataset('photo_id',(0,), maxshape=(None,),dtype='|S54')
 feature = f.create_dataset('feature',(0,4096), maxshape = (None,4096))
 f.close()
@@ -57,7 +59,7 @@ for i in range(0, num_test, batch_size):
     features = extract_features(images, layer='fc7')
     num_done = i+features.shape[0]
 
-    f= h5py.File(data_root+'test_image_fc7features.h5','r+')
+    f= h5py.File(h5_root+'test_image_fc7features.h5','r+')
     f['photo_id'].resize((num_done,))
     f['photo_id'][i: num_done] = np.array(images)
     f['feature'].resize((num_done,features.shape[1]))
@@ -67,7 +69,7 @@ for i in range(0, num_test, batch_size):
         print "Test images processed: ", num_done
 
 ### Check the file content
-f = h5py.File(data_root+'test_image_fc7features.h5','r')
+f = h5py.File(h5_root+'test_image_fc7features.h5','r')
 for key in f.keys():
     print key, f[key].shape
 print "\nA photo:", f['photo_id'][0]

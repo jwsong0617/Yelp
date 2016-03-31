@@ -2,13 +2,14 @@ caffe_root = '/home/ubuntu/caffe/'
 data_root = '/home/ubuntu/kaggle/raw/'
 
 import numpy as np
-"""
+
 import sys
 sys.path.insert(0, caffe_root + 'python')
-"""
+
 import caffe
-"""
+
 import os
+"""
 if not os.path.isfile(caffe_root + 'models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel'):
     print("Downloading pre-trained CaffeNet model...")
     !caffe_root/scripts/download_model_binary.py ../models/bvlc_reference_caffenet
