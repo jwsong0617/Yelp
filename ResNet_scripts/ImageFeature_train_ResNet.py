@@ -26,7 +26,7 @@ def extract_features(images, layer = 'fc1000'):
     transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
     transformer.set_transpose('data', (2,0,1))  #same sequence as caffenet(RGB -> BGR)
     #mean pixel is changed ilsvrc... to ResNet_mean.npy which is generated from ResNet_mean.binaryphoto
-    transformer.set_mean('data', np.load(caffe_root + 'python/caffe/imagenet/ilsvrc_2012_mean.npy').mean(1).mean(1)) # mean pixel
+    transformer.set_mean('data', np.load(caffe_root + 'python/caffe/imagenet/ResNet_mean.npy').mean(1).mean(1)) # mean pixel
     transformer.set_raw_scale('data', 255)  # the reference model operates on images in [0,255] range instead of [0,1] / same as caffenet
     transformer.set_channel_swap('data', (2,1,0))  # the reference model has channels in BGR order instead of RGB]] as same as caffenet
 
