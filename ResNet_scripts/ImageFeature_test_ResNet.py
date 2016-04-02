@@ -52,7 +52,8 @@ test_images = [os.path.join(test_folder, str(x)+'.jpg') for x in test_photos['ph
 
 num_test = len(test_images)
 print "Number of test images: ", num_test
-batch_size = 500
+#batch size 500,256,200,128,64,32 are out of memory
+batch_size = 16
 
 # Training Images
 for i in range(0, num_test, batch_size):
