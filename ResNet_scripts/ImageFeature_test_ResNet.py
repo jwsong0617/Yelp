@@ -40,7 +40,7 @@ def extract_features(images, layer = 'fc1000'):
 
 import h5py
 #f.close()
-f = h5py.File(h5_root+'test_image_fc1000features.h5','w')
+f = h5py.File(data_root+'test_image_fc1000features.h5','w')
 filenames = f.create_dataset('photo_id',(0,), maxshape=(None,),dtype='|S54')
 feature = f.create_dataset('feature',(0,1000), maxshape = (None,1000)) # 4096 to 1000
 f.close()
@@ -55,12 +55,12 @@ print "Number of test images: ", num_test
 #batch size 500,256,200,128,64,32 are out of memory
 batch_size = 16
 
-# Training Images
+# Test Images
 for i in range(0, num_test, batch_size):
     images = test_images[i: min(i+batch_size, num_test)]
     features = extract_features(images, layer='fc1000')
     num_done = i+features.shape[0]
-    f= h5py.File(h5_root+'test_image_fc1000features.h5','r+')
+    f= h5py.File(data_root+'test_image_fc1000features.h5','r+')
     f['photo_id'].resize((num_done,))
     f['photo_id'][i: num_done] = np.array(images)
     f['feature'].resize((num_done,features.shape[1]))
