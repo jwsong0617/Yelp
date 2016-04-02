@@ -46,7 +46,7 @@ feature = f.create_dataset('feature',(0,1000), maxshape = (None,1000)) # 4096 to
 f.close()
 
 import pandas as pd
-test_photos = pd.read_csv(data_root+'test_photo_to_biz_ids.csv')
+test_photos = pd.read_csv(data_root+'test_photo_to_biz.csv')
 test_folder = data_root+'test_photos/test_photos/'
 test_images = [os.path.join(test_folder, str(x)+'.jpg') for x in test_photos['photo_id'].unique()]  # get full filename
 
