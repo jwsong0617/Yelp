@@ -3,7 +3,6 @@ data_root = '/home/ubuntu/kaggle/raw/'
 h5_root = '/mnt/'
 
 import numpy as np
-
 import sys
 sys.path.insert(0, caffe_root + 'python')
 
@@ -67,11 +66,3 @@ for i in range(0, num_test, batch_size):
     f.close()
     if num_done%20000==0 or num_done==num_test:
         print "Test images processed: ", num_done
-
-### Check the file content
-f = h5py.File(h5_root+'test_image_fc7features.h5','r')
-for key in f.keys():
-    print key, f[key].shape
-print "\nA photo:", f['photo_id'][0]
-print "feature vector: (first 10-dim)", f['feature'][0][0:10], " ..."
-f.close()
