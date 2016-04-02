@@ -52,8 +52,8 @@ train_images = [os.path.join(train_folder, str(x)+'.jpg') for x in train_photos[
 
 num_train = len(train_images)
 print "Number of training images: ", num_train
-#500->256
-batch_size = 256
+#500->256->200
+batch_size = 200
 
 # Training Images
 for i in range(0, num_train, batch_size):
