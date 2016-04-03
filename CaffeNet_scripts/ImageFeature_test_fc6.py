@@ -38,7 +38,7 @@ def extract_features(images, layer = 'fc6'):
 
 import h5py
 import pandas as pd
-batch_size = 100
+batch_size = 500
 
 f = h5py.File(h5_root+'test_image_fc6features.h5','w')
 filenames = f.create_dataset('photo_id',(0,), maxshape=(None,),dtype='|S54')
