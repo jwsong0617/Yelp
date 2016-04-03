@@ -19,11 +19,11 @@ f.close()
 #photo id's names don't have consistency, so i removed all characters, punctuation(.jpg) except digits
 #Poor algorithm, it should be fixed later
 ##image_filenames preprocessing
-#i = 0
-#for x in image_filenames:
-#    image_filenames[i] = re.sub( "\D","",x) # remove all characters, punctuation(.jpg) except digits
-#    i = i+1
-#print "Number of business: ", len(biz_ids)
+i = 0
+for x in image_filenames:
+    image_filenames[i] = re.sub( "\D","",x) # remove all characters, punctuation(.jpg) except digits
+    i = i+1
+print "Number of business: ", len(biz_ids)
 
 df = pd.DataFrame(columns=['business','feature vector'])
 index = 0
