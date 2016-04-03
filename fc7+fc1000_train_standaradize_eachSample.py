@@ -44,7 +44,7 @@ X_train_Res = np.array([convert_feature_to_vector(x) for x in train_df_Res['feat
 
 X_train_scaled = preprocessing.scale(X_train,axis=1)
 X_train_scaled_Res = preprocessing.scale(X_train_Res,axis=1)
-X_train_scaled_Concat = np.hstack((X_train,X_train_Res))
+X_train_scaled_Concat = np.hstack((X_train_scaled,X_train_scaled_Res))
 #X_test_scaled = preprocessing.scale(X_test)
 #X_test_scaled_Res = preprocessing.scale(X_test_Res)
 #X_test_scaled_Concat = np.hstack((X_test,X_test_Res))

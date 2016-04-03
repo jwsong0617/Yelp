@@ -42,8 +42,8 @@ X_train = np.array([convert_feature_to_vector(x) for x in train_df['feature vect
 X_train_Res = np.array([convert_feature_to_vector(x) for x in train_df_Res['feature vector']])
 #X_test_Res = np.array([convert_feature_to_vector(x) for x in test_df_Res['feature vector']])
 
-X_train_scaled = preprocessing.scale(X_train)
-X_train_scaled_Res = preprocessing.scale(X_train_Res)
+X_train_scaled = preprocessing.normalize(X_train, norm='max')
+X_train_scaled_Res = preprocessing.normalize(X_train_Res, norm='max')
 X_train_scaled_Concat = np.hstack((X_train_scaled,X_train_scaled_Res))
 #X_test_scaled = preprocessing.scale(X_test)
 #X_test_scaled_Res = preprocessing.scale(X_test_Res)

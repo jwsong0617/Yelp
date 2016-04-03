@@ -13,6 +13,8 @@ data_root_ResNet = 'F:/Yelp_data/ResNet/'
 
 train_df = pd.read_csv(data_root+"train_biz_fc7features.csv")
 test_df  = pd.read_csv(data_root+"test_biz_fc7features.csv")
+train_df_fc6 = pd.read_csv(data_root+"train_biz_fc6features.csv")
+test_df_fc6  = pd.read_csv(data_root+"test_biz_fc6features.csv")
 train_df_Res = pd.read_csv(data_root_ResNet+"train_biz_fc1000features.csv")
 test_df_Res = pd.read_csv(data_root_ResNet+"test_biz_fc1000features.csv")
 
@@ -40,12 +42,12 @@ X_test = np.array([convert_feature_to_vector(x) for x in test_df['feature vector
 X_train_Res = np.array([convert_feature_to_vector(x) for x in train_df_Res['feature vector']])
 X_test_Res = np.array([convert_feature_to_vector(x) for x in test_df_Res['feature vector']])
 
-#X_train_scaled = preprocessing.scale(X_train)
-#X_train_scaled_Res = preprocessing.scale(X_train_Res)
-X_train_scaled_Concat = np.hstack((X_train,X_train_Res))
-#X_test_scaled = preprocessing.scale(X_test)
-#X_test_scaled_Res = preprocessing.scale(X_test_Res)
-X_test_scaled_Concat = np.hstack((X_test,X_test_Res))
+X_train_scaled = preprocessing.normalize(X_train, norm='l2')
+X_train_scaled_Res = preprocessing.normalize(X_train_Res, norm='l2')
+X_train_scaled_Concat = np.hstack((X_train_scaled,X_train_scaled_Res))
+X_test_scaled = preprocessing.normalize(X_test, norm='l2')
+X_test_scaled_Res = preprocessing.normalize(X_test_Res, norm='l2')
+X_test_scaled_Concat = np.hstack((X_test_scaled,X_test_scaled_Res))
 
 mlb = MultiLabelBinarizer()
 y_train= mlb.fit_transform(y_train)  #Convert list of labels to binary matrix
@@ -70,7 +72,7 @@ for i in range(len(test_data_frame)):
     label = str(label)[1:-1].replace(",", " ")
     df.loc[i] = [str(biz), label]
 
-with open(data_root+"submission_fc7_fc1000.csv",'w') as f:
+with open(data_root+"submission_fc7_fc1000_norm.csv",'w') as f:
     df.to_csv(f, index=False)
 
 statistics = pd.DataFrame(columns=[ "attribuite "+str(i) for i in range(9)]+['num_biz'], index = ["biz count", "biz ratio"])
