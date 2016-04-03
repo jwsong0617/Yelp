@@ -1,6 +1,6 @@
 caffe_root = '/home/ubuntu/caffe/'
 data_root = '/home/ubuntu/kaggle/raw/'
-h5_root = '/mnt/'
+h5_root = '/mnt/five/'
 
 import numpy as np
 import sys
