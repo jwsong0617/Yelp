@@ -1,5 +1,6 @@
 caffe_root = '/home/ubuntu/caffe/'
 data_root = '/home/ubuntu/kaggle/raw/'
+h5_root = '/mnt/'
 
 import numpy as np
 
@@ -38,7 +39,7 @@ def extract_features(images, layer = 'fc6'):
 
 import h5py
 #f.close()
-f = h5py.File(data_root+'train_image_fc6features.h5','w')
+f = h5py.File(h5_root+'train_image_fc6features.h5','w')
 filenames = f.create_dataset('photo_id',(0,), maxshape=(None,),dtype='|S54')
 feature = f.create_dataset('feature',(0,4096), maxshape = (None,4096))
 f.close()
@@ -57,7 +58,7 @@ for i in range(0, num_train, batch_size):
     images = train_images[i: min(i+batch_size, num_train)]
     features = extract_features(images, layer='fc6')
     num_done = i+features.shape[0]
-    f= h5py.File(data_root+'train_image_fc6features.h5','r+')
+    f= h5py.File(h5_root+'train_image_fc6features.h5','r+')
     f['photo_id'].resize((num_done,))
     f['photo_id'][i: num_done] = np.array(images)
     f['feature'].resize((num_done,features.shape[1]))
@@ -67,7 +68,7 @@ for i in range(0, num_train, batch_size):
         print "Train images processed: ", num_done
 ### Check the file content
 
-f = h5py.File(data_root+'train_image_fc6features.h5','r')
+f = h5py.File(h5_root+'train_image_fc6features.h5','r')
 print 'train_image_features.h5:'
 for key in f.keys():
     print key, f[key].shape
