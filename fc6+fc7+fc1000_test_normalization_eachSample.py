@@ -13,8 +13,8 @@ data_root_ResNet = 'F:/Yelp_data/ResNet/'
 
 train_df = pd.read_csv(data_root+"train_biz_fc7features.csv")
 test_df  = pd.read_csv(data_root+"test_biz_fc7features.csv")
-train_df_fc6 = pd.read_csv(data_root+"train_biz_fc6features.csv")
-test_df_fc6  = pd.read_csv(data_root+"test_biz_fc6features.csv")
+train_df_fc6 = pd.read_csv(data_root+"train_biz_fc6features_batch500.csv")
+test_df_fc6  = pd.read_csv(data_root+"test_biz_fc6features_batch500.csv")
 train_df_Res = pd.read_csv(data_root_ResNet+"train_biz_fc1000features.csv")
 test_df_Res = pd.read_csv(data_root_ResNet+"test_biz_fc1000features.csv")
 
@@ -79,7 +79,7 @@ for i in range(len(test_data_frame)):
     label = str(label)[1:-1].replace(",", " ")
     df.loc[i] = [str(biz), label]
 
-with open(data_root+"submission_fc6_fc7_fc1000_norm.csv",'w') as f:
+with open(data_root+"submission_fc6_batch500_fc7_fc1000_norm.csv",'w') as f:
     df.to_csv(f, index=False)
 
 statistics = pd.DataFrame(columns=[ "attribuite "+str(i) for i in range(9)]+['num_biz'], index = ["biz count", "biz ratio"])

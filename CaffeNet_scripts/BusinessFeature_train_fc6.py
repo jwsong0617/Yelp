@@ -13,7 +13,7 @@ biz_ids = train_labels.index.unique()
 print "Number of business: ", len(biz_ids) ,   "(4 business with missing labels are dropped)"
 
 ## Load image features
-f = h5py.File(data_root+'train_image_fc6features.h5','r')
+f = h5py.File(data_root+'train_image_fc6features_batch500.h5','r')
 train_image_features = np.copy(f['feature'])
 f.close()
 
@@ -36,5 +36,5 @@ for biz in biz_ids:
     if index%1000==0:
         print "Buisness processed: ", index, "Time passed: ", "{0:.1f}".format(time.time()-t), "sec"
 
-with open(data_root+"train_biz_fc6features.csv",'w') as f:
+with open(data_root+"train_biz_fc6features_batch500.csv",'w') as f:
     df.to_csv(f, index=False)
