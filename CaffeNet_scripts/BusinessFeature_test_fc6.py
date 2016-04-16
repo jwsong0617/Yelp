@@ -10,7 +10,7 @@ test_photo_to_biz = pd.read_csv(data_root+'test_photo_to_biz.csv')
 biz_ids = test_photo_to_biz['business_id'].unique()
 
 ## Load image features
-f = h5py.File(data_root+'test_image_fc6features.h5','r')
+f = h5py.File(data_root+'test_image_fc6features_batch500.h5','r')
 image_filenames = list(np.copy(f['photo_id']))
 image_filenames = [name.split('/')[-1] for name in image_filenames]  #remove the full path and the str ".jpg"
 image_features = np.copy(f['feature'])
@@ -43,5 +43,5 @@ for biz in biz_ids:
     if index%1000==0:
         print "Buisness processed: ", index, "Time passed: ", "{0:.1f}".format(time.time()-t), "sec"
 
-with open(data_root+"test_biz_fc6features.csv",'w') as f:
+with open(data_root+"test_biz_fc6features_batch500.csv",'w') as f:
     df.to_csv(f, index=False)
